@@ -1,21 +1,24 @@
 $(document).ready(function(){
 
     //Array of the variable 'topics' that has list of cars
-	var topics = ["BMW e30 ", "BMW e36 ", "BMW e46 ", "BMW e92 ", "BMW f80 "];
+	var topics = ["BMW M3", "Mercedes-Benz AMG", "Subaru WRX STI", "Ferrari 458 Speciale", 
+				  "McClaren P1", "Porsche 918 Spyder", "BMW e60 M5", "Nissan Skyline R34"];
 
 	//Pull the strings from the variable 'topics' and display them as buttons on the page
 	for (var i = 0; i < topics.length; i++) {
 		var cars = $('<button>');
-		$('<button>').attr('id', topics[i])
-		cars.text(topics[i]);
+		cars.text(topics[i]).attr("data-car", topics[i]);
 		$("#topicButtons").append(cars);
 	}
 
-	//When you click one of the buttons, it appends 
+	//When you click one of the buttons, it appends and calls on Giphy API
 	$("button").click(function(){		
-		//variable queryURL to search Giphy for bmw m3's (example being used currently)
-		var queryURL = "https://api.giphy.com/v1/gifs/search?q=bmw+m3&api_key=dc6zaTOxFJmzC"
-	
+
+		var Car = $(this).attr("data-car");
+
+		//variable queryURL to search Giphy for BMW (example being used currently)
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + Car + "&api_key=dc6zaTOxFJmzC&limit=10"
+	 
 		//ajax call
 		$.ajax({
 	        url: queryURL,
@@ -33,7 +36,7 @@ $(document).ready(function(){
 	        for (var i = 0; i < results.length; i++) {
 	        	
 	        	//only taking action if the photo has an appropriate rating (everything)
-	        	if (results[i].rating !== "r" && results[i].rating !== "pg-13"){
+	        	if (results[i].rating){
 
 	        		//create a div with the class "item"
 	        		var gifDiv = $("<div class='item'>");
@@ -51,9 +54,8 @@ $(document).ready(function(){
 	        		carImage.attr("src", results[i].images.fixed_height.url);
 
 	        		//Append paragraph and carIamge created to "gifDiv"
-	        		$("#cars").append(p);
-	        		$("#cars").append(carImage);
-
+	        		$("#cars").prepend(p);
+	        		$("#cars").prepend(carImage);
 
 
 
