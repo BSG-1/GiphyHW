@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
     //Array of the variable 'topics' that has list of cars
-	var topics = ["BMW M3", "Mercedes-Benz AMG", "Subaru WRX STI", "Ferrari 458 Speciale", 
-				  "McClaren P1", "Porsche 918 Spyder", "BMW e60 M5", "Nissan Skyline R34"];
+	var topics = ["bmw e30", "Mercedes-Benz AMG", "Subaru WRX STI", "Ferrari F40", 
+				  "McClaren P1", "Porsche 918 Spyder", "BMW e60 M5", "Nissan Skyline R34",
+				  "Lamborghini Aventador SV", "Pagani Zonda R", "Ford GT", "Datsun 240Z"];
 
 	//Pull the strings from the variable 'topics' and display them as buttons on the page
 	for (var i = 0; i < topics.length; i++) {
@@ -35,11 +36,8 @@ $(document).ready(function(){
 	        //looping over every result item
 	        for (var i = 0; i < results.length; i++) {
 	        	
-	        	//only taking action if the photo has an appropriate rating (everything)
+	        	//Display results based upon ratings (displaying all ratings)
 	        	if (results[i].rating){
-
-	        		//create a div with the class "item"
-	        		var gifDiv = $("<div class='item'>");
 
 	        		//storing the result item's rating
 	        		var rating = results[i].rating;
@@ -47,17 +45,30 @@ $(document).ready(function(){
 	        		//make paragraph tag with result item's rating
 	        		var p = $("<p>").text("Rating: " + rating);
 
-	        		//Create image tag
-	        		var carImage = $("<img>");
+	        		//Create image tag and apply it to every still result
+	        		var carImage = $("<img>").attr("src", results[i].images.fixed_height_still.url).attr("data-state", "still").attr("class", "gif");
 
-	        		//Giving the img tag a src attr of a property pulled off the result item
-	        		carImage.attr("src", results[i].images.fixed_height.url);
+	        		//Create image tag and apply it to every still result
+	        		var animateImate = $("<img>").attr("src", results[i].images.fixed_height.url).attr("data-state", "animate").attr("class", "gif");
 
 	        		//Append paragraph and carIamge created to "gifDiv"
 	        		$("#cars").prepend(p);
 	        		$("#cars").prepend(carImage);
 
+	        		$(".gif").on("click", function(){
+	        			var state = $(this).attr("data-state");
 
+	        			
+	        			for (var i = 0; i < results.length; i++) {
+		        			if (state === "still"){
+		        				$(this).attr("src", $(this).attr("data-animate"));
+		        				$(this).attr("data-state", "animate");
+		        			} else {
+		        				$(this).attr("src", $(this).attr("data-still"));
+		        				$(this).attr("data-state", "still");
+		        			}	
+	        			}
+	        		})
 
 	        	}
 	        }
@@ -74,3 +85,7 @@ $(document).ready(function(){
 //q = search query, term, or phrase
 //limit = number of results to return 
 //rating = limit results of those rated (g, pg, pg-13, or r)
+
+
+//results[i].images.fixed_height_still.url gets the still image of the gif
+//results[i].images.fixed_height.url gets the animated gif version
