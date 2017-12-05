@@ -1,16 +1,30 @@
+//jQuery ready to go
 $(document).ready(function(){
 
     //Array of the variable 'topics' that has list of cars
 	var topics = ["BMW e30", "Mercedes-Benz AMG", "Subaru WRX STI", "Ferrari F40", 
-				  "McClaren P1", "Porsche 918 Spyder", "BMW e60 M5", "Nissan Skyline R34",
+				  "McClaren P1", "Porsche 918 Spyder", "BMW M5", "Nissan Skyline R34",
 				  "Lamborghini Aventador", "Pagani Zonda R", "Ford GT", "Datsun 240Z"];
 
 	//Pull the strings from the variable 'topics' and display them as buttons on the page
-	for (var i = 0; i < topics.length; i++) {
-		var cars = $('<button>');
-		cars.text(topics[i]).attr("data-car", topics[i]);
-		$("#topicButtons").append(cars);
+	//when it loads
+	function renderCars(){
+		for (var i = 0; i < topics.length; i++) {
+			var cars = $('<button>' + topics[i] + "</button>");
+			cars.text(topics[i]).attr("data-car", topics[i]);
+			$("#topicButtons").append(cars);
+		}	
 	}
+
+	//Submit/add a new car from the form to the topics array
+	$("#addCar").on("click", function(){
+		var txt = $("#carInput").val();
+		topics.push(txt);
+		renderCars();
+	})
+
+	//display initial list of cars
+	renderCars();
 
 	//When you click one of the buttons, it appends and calls on Giphy API
 	$("button").click(function(){		
@@ -46,7 +60,11 @@ $(document).ready(function(){
 	        		var p = $("<p>").text("Rating: " + rating);
 
 	        		//Create image tag and apply it to every still result
-	        		var carImage = $("<img>").attr("src", results[i].images.fixed_height_still.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-animate", results[i].images.fixed_height.url).attr("data-state", "still").attr("class", "gif");
+	        		var carImage = $("<img>").attr("src", results[i].images.fixed_height_still.url).attr(
+	        			"data-still", results[i].images.fixed_height_still.url).attr(
+	        			"data-animate", results[i].images.fixed_height.url).attr(
+	        			"data-state", "still").attr(
+	        			"class", "gif");
 
 	        		//Append paragraph and carIamge created to "gifDiv"
 	        		$("#cars").prepend(p);
