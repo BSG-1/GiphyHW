@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
     //Array of the variable 'topics' that has list of cars
-	var topics = ["bmw e30", "Mercedes-Benz AMG", "Subaru WRX STI", "Ferrari F40", 
+	var topics = ["BMW e30", "Mercedes-Benz AMG", "Subaru WRX STI", "Ferrari F40", 
 				  "McClaren P1", "Porsche 918 Spyder", "BMW e60 M5", "Nissan Skyline R34",
-				  "Lamborghini Aventador SV", "Pagani Zonda R", "Ford GT", "Datsun 240Z"];
+				  "Lamborghini Aventador", "Pagani Zonda R", "Ford GT", "Datsun 240Z"];
 
 	//Pull the strings from the variable 'topics' and display them as buttons on the page
 	for (var i = 0; i < topics.length; i++) {
@@ -46,36 +46,29 @@ $(document).ready(function(){
 	        		var p = $("<p>").text("Rating: " + rating);
 
 	        		//Create image tag and apply it to every still result
-	        		var carImage = $("<img>").attr("src", results[i].images.fixed_height_still.url).attr("data-state", "still").attr("class", "gif");
-
-	        		//Create image tag and apply it to every still result
-	        		var animateImate = $("<img>").attr("src", results[i].images.fixed_height.url).attr("data-state", "animate").attr("class", "gif");
+	        		var carImage = $("<img>").attr("src", results[i].images.fixed_height_still.url).attr("data-still", results[i].images.fixed_height_still.url).attr("data-animate", results[i].images.fixed_height.url).attr("data-state", "still").attr("class", "gif");
 
 	        		//Append paragraph and carIamge created to "gifDiv"
 	        		$("#cars").prepend(p);
 	        		$("#cars").prepend(carImage);
-
-	        		$(".gif").on("click", function(){
-	        			var state = $(this).attr("data-state");
-
-	        			
-	        			for (var i = 0; i < results.length; i++) {
-		        			if (state === "still"){
-		        				$(this).attr("src", $(this).attr("data-animate"));
-		        				$(this).attr("data-state", "animate");
-		        			} else {
-		        				$(this).attr("src", $(this).attr("data-still"));
-		        				$(this).attr("data-state", "still");
-		        			}	
-	        			}
-	        		})
-
 	        	}
 	        }
+
+	        //On every click of the "gif" class, it will change its 'data-state' from still to
+	        // animate & vice-versa
+	        $(".gif").on("click", function(){
+	        	var state = $(this).attr("data-state");
+	        			
+		        if (state === "still"){
+		        	$(this).attr("src", $(this).attr("data-animate"));
+		        	$(this).attr("data-state", "animate");
+		       	} else {
+		      		$(this).attr("src", $(this).attr("data-still"));
+		       		$(this).attr("data-state", "still");
+		       	}	
+	        })
 	    })		
-
 	})
-
 })
 
 
