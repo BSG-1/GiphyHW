@@ -9,25 +9,28 @@ $(document).ready(function(){
 	//Pull the strings from the variable 'topics' and display them as buttons on the page
 	//when it loads
 	function renderCars(){
+		$("#topicButtons").empty();
 		for (var i = 0; i < topics.length; i++) {
-			var cars = $('<button>' + topics[i] + "</button>");
+			var cars = $('<button>' + topics[i] + '</button>');
+			cars.addClass('ffs')
 			cars.text(topics[i]).attr("data-car", topics[i]);
 			$("#topicButtons").append(cars);
 		}	
 	}
-
-	//Submit/add a new car from the form to the topics array
-	$("#addCar").on("click", function(){
-		var txt = $("#carInput").val();
-		topics.push(txt);
-		renderCars();
-	})
-
 	//display initial list of cars
 	renderCars();
 
+	//Submit/add a new car from the form to the topics array
+	$("#addCar").on("click", function(event){
+		event.preventDefault();
+		var txt = $("#carInput").val();
+		topics.push(txt);
+		console.log(txt);
+		renderCars();
+	})
+
 	//When you click one of the buttons, it appends and calls on Giphy API
-	$("button").click(function(){		
+	$(document).on("click", '.ffs', function(){		
 
 		var Car = $(this).attr("data-car");
 
