@@ -1,0 +1,40 @@
+.container {
+	background-color: white;
+}
+
+p {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 18px;
+	font-color: white;
+}
+
+.ffs {
+	background-color: #008CBA;    
+	border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+#carLabel {
+	font-color: white;
+	text-align: center;
+}
+
+#addCar {
+	padding: 5px;
+	margin-right: 5px;
+}
+
+#car-form {
+	float: right;
+	font-size: 20px;
+}
+
+#carInput {
+	border: solid;
+	border-width: 0.5px
+}

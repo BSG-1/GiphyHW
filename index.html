@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
 	<title>Car Giphy</title>
+	
 	<link rel="stylesheet" type="text/css" href="style.css">
+	
+	<!--Google Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+
+	<!--Link to Boostrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
 </head>
 <body>
-	
-	<!--Loading car Buttons from hw.js-->
-	<div id="topicButtons"></div>
 
-	<br><br>
-	
-	<!--Form to submit car gifs to page-->
-	<form id="car-form">
-		<label for="car-input">Add a car!</label><br>
-		<input type="text" id="carInput"><br>
-		<input id="addCar" type="submit" value="Submit">
-	</form>
-	
-	<br><br>
+	<br>
 
-	<div id="cars"></div>
+	<div class="container">
+		
+		<!--Loading car Buttons from hw.js-->
+		<div id="topicButtons"></div>
+		
+		<hr>
+		<br><br>
+		
+		<!--Form to submit car gifs to page-->
+		<div class="text-right">
+			<form id="car-form">
+				<label for="car-input" id="carLabel">Add a car!</label>
+					<br>
+				<input type="text" id="carInput">
+					<br>
+				<input class="btn btn-success" id="addCar" type="submit" value="Submit">
+			</form>
+		</div>
+		
+		<br><br>
+		
+		<!--Display images and ratings as 2 columns-->
+		<div id="cars"></div>
+
+	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="hw.js"></script>

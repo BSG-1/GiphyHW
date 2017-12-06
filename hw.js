@@ -4,14 +4,15 @@ $(document).ready(function(){
     //Array of the variable 'topics' that has list of cars
 	var topics = ["BMW e30", "Mercedes-Benz AMG", "Subaru WRX STI", "Ferrari F40", 
 				  "McClaren P1", "Porsche 918 Spyder", "BMW M5", "Nissan Skyline R34",
-				  "Lamborghini Aventador", "Pagani Zonda R", "Ford GT", "Datsun 240Z"];
+				  "Lamborghini Aventador", "Pagani Zonda R", "Ford GT", "Datsun 240Z", 
+				  "Acura NSX"];
 
 	//Pull the strings from the variable 'topics' and display them as buttons on the page
 	//when it loads
 	function renderCars(){
 		$("#topicButtons").empty();
 		for (var i = 0; i < topics.length; i++) {
-			var cars = $('<button>' + topics[i] + '</button>');
+			var cars = $('<button>' + topics[i] + '</button>').css("margin", '5px');
 			cars.addClass('ffs')
 			cars.text(topics[i]).attr("data-car", topics[i]);
 			$("#topicButtons").append(cars);
